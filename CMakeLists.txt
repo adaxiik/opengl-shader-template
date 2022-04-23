@@ -13,8 +13,8 @@ find_package(GLEW REQUIRED)
 
 file(GLOB SOURCES "src/Shader/*.cpp" "src/Application/*.cpp" "src/imgui/*.cpp" )
 
-add_executable(sandbox-3d src/main.cpp src/glew.c ${SOURCES})
+add_executable(opengl_template src/main.cpp src/glew.c ${SOURCES})
 
-target_link_libraries(sandbox-3d ${OPENGL_gl_LIBRARY} glfw3 GL)
+target_link_libraries(opengl_template ${OPENGL_gl_LIBRARY} glfw3 GL)
 
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/shaders DESTINATION ${CMAKE_CURRENT_BINARY_DIR}) 
