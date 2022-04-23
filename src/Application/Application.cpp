@@ -36,7 +36,7 @@ void Application::Init(int width, int height, std::string title,bool resizeable)
     this->title = title;
     this->resizeable = resizeable;
     LoadGLFW();
-    LoadGlad();
+    LoadGLEW();
     LoadImGui();
     SetupRenderingScreen();
     if((this->shaderProgram = Shader::CompileShaders("shaders/vert.vs", "shaders/frag.fs")) == 0)
@@ -90,14 +90,13 @@ void Application::LoadImGui()
 
 
 
-void Application::LoadGlad()
+void Application::LoadGLEW()
 {
-    // glad: load all OpenGL function pointers
-    // ---------------------------------------
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+
+    if (glewInit() != GLEW_OK)
     {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        exit(1);
+        std::cerr << "Failed to initialize GLEW" << std::endl;
+        exit(EXIT_FAILURE);
     }
 }
 
@@ -152,6 +151,7 @@ void Application::Cleanup()
 
 void Application::Run()
 {
+
     double lastTime = glfwGetTime();
     int frames = 0;
 
